@@ -1,0 +1,78 @@
+<project name="pics" default="Deploy" basedir=".">
+
+	<target name="Deploy" description="Deploy" depends="SetProperties, PrepareDir, CreateProjectJar, CopyFiles, CreateWar" />
+
+	<target name="SetProperties">
+		<property name="app.name" value="pics" />
+		<property name="deploy.base" value="/Users/jon/temp" />
+		<property name="deploy.home" value="${deploy.base}/${app.name}" />
+		<property name="dist.war" value="${app.name}.war" />
+	</target>
+
+	<target name="PrepareDir">
+		<delete dir="${deploy.home}" />
+		<mkdir dir="${deploy.home}" />
+		<mkdir dir="${deploy.home}/WEB-INF" />
+		<mkdir dir="${deploy.home}/WEB-INF/classes" />
+		<mkdir dir="${deploy.home}/WEB-INF/lib" />
+	</target>
+	
+	<target name="CreateProjectJar">
+		<jar jarfile="${deploy.home}/web-inf/lib/${app.name}.jar" basedir="bin">
+			<include name="**/*.class" />
+		</jar>
+	</target>
+
+	<target name="CopyFiles" depends="">
+
+		<copy todir="${deploy.home}">
+			<fileset dir="web">
+				<include name="*.jsp" />
+		  </fileset>
+		</copy>
+
+		<copy todir="${deploy.home}/etc">
+			<fileset dir="web/etc" />
+		</copy>
+
+		<copy todir="${deploy.home}/img">
+			<fileset dir="web/img" />
+		</copy>
+
+		<copy todir="${deploy.home}/picture">
+			<fileset dir="web/picture" />
+		</copy>
+
+		<copy todir="${deploy.home}/preview">
+			<fileset dir="web/preview" />
+		</copy>
+
+		<copy todir="${deploy.home}/thumb">
+			<fileset dir="web/thumb" />
+		</copy>
+
+		<copy todir="${deploy.home}/WEB-INF">
+			<fileset dir="web/WEB-INF">
+				<include name="web.xml" />
+		  </fileset>
+		</copy>
+
+		<copy todir="${deploy.home}/web-inf/classes">
+			<fileset dir="resources">
+				<include name="*.properties" />
+			</fileset>
+		</copy>
+
+		<copy todir="${deploy.home}/web-inf/lib">
+			<fileset dir="lib">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+
+	</target>
+
+	<target name="CreateWar">
+		<jar jarfile="${deploy.base}/${dist.war}" basedir="${deploy.home}" />
+	</target>
+
+</project>

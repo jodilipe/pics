@@ -1,0 +1,55 @@
+body {
+	margin:0;
+	color:#008080;
+	background-color:#000000;
+	font-family:Verdana; 
+	font-size:8pt;
+}
+
+div.menu {
+	display:inline-block;
+}
+
+div.menu_item {
+	float:left;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+div.selected_menu_item {
+	float:left;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+div.thumbnails {
+}
+
+div.thumbnail {
+	float:left;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+
+div.exif_item {
+}
+
+div.exif_info {
+	display:inline-block;
+}
+
+a {
+	text-decoration: none;
+	font-weight:bold;
+	color:#008080; 
+	font-family:Verdana; 
+	font-size:8pt;
+}
+
+a:hover {
+	text-decoration: underline;
+	font-weight:bold;
+	color:#008080;
+	font-family:Verdana; 
+	font-size:8pt;
+}
