@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="pics/src"/>
+	<classpathentry kind="lib" path="pics/lib/metadata-extractor-2.6.4.jar"/>
+	<classpathentry kind="lib" path="pics/lib/xmpcore.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/tomcatrunner_5.5/tomcathome/common/lib/servlet-api.jar"/>
+	<classpathentry kind="output" path="pics/bin"/>
+</classpath>
