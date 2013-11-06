@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="etc/pics.css" type="text/css" />
 </head>
 <body>
+
+<%@include file="_menu.jsp"%>
+
 <div class="picture_preview">
 <a href="original.jsp?filename=<%= request.getParameter("filename") %>"><img border="0" src="/pics/preview/<%= request.getParameter("filename") %>"></a>
 
@@ -20,6 +23,8 @@
 <div class="exif_item"><%= key + ": " + result.get(key) %></div>			
 <% } %>		
 </div>
+
+<div class="preview_filename"><%=request.getParameter("filename")%></div>
 
 </div>
 </body>

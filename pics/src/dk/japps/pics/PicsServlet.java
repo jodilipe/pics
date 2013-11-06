@@ -17,10 +17,10 @@ public class PicsServlet extends HttpServlet {
 
 	private void initializeLogging() {
     try {
-			Handler fileHandler = new FileHandler("./pics.log");
-			fileHandler.setLevel(Level.ALL);
-			fileHandler.setFormatter(new SimpleFormatter());
-			Logger.getLogger("dk.japps").addHandler(fileHandler);
+//			Handler fileHandler = new FileHandler("./pics.log");
+//			fileHandler.setLevel(Level.ALL);
+//			fileHandler.setFormatter(new SimpleFormatter());
+//			Logger.getLogger("dk.japps").addHandler(fileHandler);
 			
 			Handler consoleHandler = new ConsoleHandler();
 			consoleHandler.setLevel(Level.ALL);
