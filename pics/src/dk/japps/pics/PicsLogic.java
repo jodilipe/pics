@@ -92,7 +92,7 @@ public class PicsLogic {
 		return pictureCopies;
 	}
 
-	private void createMissingPictureCopies(Folder pictures, String pictureCopyPath, int pictureCopySize, float pictureCopyQuality) {
+	private void createMissingPictureCopies(Folder pictures, String pictureCopyPath, int pictureCopySize, double pictureCopyQuality) {
 		for (FileItem fileItem : pictures.getFileItems()) {
 			if (fileItem.isFile() && !pictureCopyExists(fileItem, pictureCopyPath)) {
 				ImageCopyUtil.createPictureCopy(fileItem.getPath(), pictureCopyPath + "/" + fileItem.getName(), pictureCopySize, pictureCopyQuality);

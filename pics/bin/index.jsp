@@ -9,13 +9,20 @@
 </head>
 <body>
 
-<%@include file="_menu.jsp"%>
+<div class="layout">
+	<div class="header">
+		Header
+	</div>
 
-<div class="thumbnails">
-	<% List<String> thumbs = new PicsLogic().getThumbnails(request.getParameter("category")); %>
-	<% for (String thumb : thumbs) { %>
-	<div class="thumbnail"><a href="preview.jsp?filename=<%= thumb %>"><img border="0" src="/pics/thumb/<%= thumb %>"></a></div>
-	<% } %>
+	<%@include file="_menu.jsp"%>
+
+	<div class="thumbnails">
+		<% List<String> thumbs = new PicsLogic().getThumbnails(request.getParameter("category")); %>
+		<% for (String thumb : thumbs) { %>
+		<div class="thumbnail"><a href="preview.jsp?filename=<%= thumb %>"><img border="0" src="/pics/thumb/<%= thumb %>"></a></div>
+		<% } %>
+	</div>
+
 </div>
 
 </body>

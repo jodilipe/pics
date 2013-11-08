@@ -6,6 +6,6 @@
 	<classpathentry kind="src" path="web"/>
 	<classpathentry kind="lib" path="/tomcatrunner_5.5/tomcathome/common/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="lib/metadata-extractor-2.6.4.jar"/>
-	<classpathentry kind="lib" path="lib/xmpcore.jar"/>
+	<classpathentry kind="lib" path="lib/thumbnailator-0.4.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

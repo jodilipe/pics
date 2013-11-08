@@ -35,10 +35,6 @@
 			<fileset dir="web/etc" />
 		</copy>
 
-		<copy todir="${deploy.home}/img">
-			<fileset dir="web/img" />
-		</copy>
-
 		<copy todir="${deploy.home}/picture">
 			<fileset dir="web/picture" />
 		</copy>
