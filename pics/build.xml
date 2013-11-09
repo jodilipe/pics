@@ -15,6 +15,9 @@
 		<mkdir dir="${deploy.home}/WEB-INF" />
 		<mkdir dir="${deploy.home}/WEB-INF/classes" />
 		<mkdir dir="${deploy.home}/WEB-INF/lib" />
+		<mkdir dir="${deploy.home}/picture" />
+		<mkdir dir="${deploy.home}/preview" />
+		<mkdir dir="${deploy.home}/thumb" />
 	</target>
 	
 	<target name="CreateProjectJar">
@@ -35,6 +38,18 @@
 			<fileset dir="web/etc" />
 		</copy>
 
+		<copy todir="${deploy.home}/css">
+			<fileset dir="web/css" />
+		</copy>
+
+		<copy todir="${deploy.home}/js">
+			<fileset dir="web/js" />
+		</copy>
+
+		<copy todir="${deploy.home}/fonts">
+			<fileset dir="web/fonts" />
+		</copy>
+<!-- 
 		<copy todir="${deploy.home}/picture">
 			<fileset dir="web/picture" />
 		</copy>
@@ -46,16 +61,16 @@
 		<copy todir="${deploy.home}/thumb">
 			<fileset dir="web/thumb" />
 		</copy>
-
+-->
 		<copy todir="${deploy.home}/WEB-INF">
 			<fileset dir="web/WEB-INF">
 				<include name="web.xml" />
 		  </fileset>
 		</copy>
 
-		<copy todir="${deploy.home}/web-inf/classes">
+		<copy tofile="${deploy.home}/web-inf/classes/application.properties">
 			<fileset dir="resources">
-				<include name="*.properties" />
+				<include name="application_prod.properties" />
 			</fileset>
 		</copy>
 

@@ -22,4 +22,9 @@ public class PicsProperties {
     return properties.getProperty(key);
   }
   
+  public static String getProperty(String key, String defaultValue) {
+	String property = properties.getProperty(key);
+	return property != null ? property : defaultValue;
+  }
+  
 }

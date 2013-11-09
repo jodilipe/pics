@@ -1,3 +1,8 @@
+body {
+	background-color:grey;
+}
+
+/*
 html {
 	height: 100%;
 }
@@ -50,12 +55,15 @@ div.thumbnails {
 	border:solid;
 	border-color: yellow;
 }
-
+*/
 div.thumbnail {
-	float:left;
-	margin-right: 10px;
+	border:none;
+	background-color:grey;
 }
-
+div.btn-default {
+	background-color:#eee;
+}
+/*
 div.picture_preview {
 	margin-left: 10px;
 }
@@ -87,3 +95,4 @@ a:hover {
 	font-family:Verdana; 
 	font-size:8pt;
 }
+*/

@@ -107,9 +107,9 @@ public class PictureFileUtil {
 	}
 
 	public Map<String, String> getExifInfo(String filename) {
+		Map<String, String> result = new HashMap<String, String>();
 		try {
 			Metadata metadata = ImageMetadataReader.readMetadata(new File(filename));
-			Map<String, String> result = new HashMap<String, String>();
 			for (Directory directory : metadata.getDirectories()) {
 				for (Tag tag : directory.getTags()) {
 					if (includeTag(tag.getTagName())) {
@@ -120,10 +120,11 @@ public class PictureFileUtil {
 //					}
 				}
 			}
-			return result;
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			result.put("Exif", "no info found");
+//			throw new RuntimeException(e);
 		}
+		return result;
 	}
 	
 	private boolean includeTag(String tagName) {

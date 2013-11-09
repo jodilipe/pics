@@ -9,8 +9,7 @@ public class PicsLogic {
 
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
-//		new PicsLogic().syncPictureCopies();
-		new PicsLogic().refreshPictureCopies();
+		new PicsLogic().syncPictureCopies();
 		System.out.println(System.currentTimeMillis()-start + "ms");
 	}
 	
@@ -28,15 +27,10 @@ public class PicsLogic {
 	}
 	
 	public void syncPictureCopies() {
-		updatePictureCopies(Constants.PREVIEW_PATH, Constants.PREVIEW_SIZE, Constants.PREVIEW_QUALITY, false);
-		updatePictureCopies(Constants.THUMBNAIL_PATH, Constants.THUMBNAIL_SIZE, Constants.THUMBNAIL_QUALITY, false);
+		updatePictureCopies(Constants.THUMBNAIL_PATH, Constants.THUMBNAIL_SIZE, Constants.THUMBNAIL_QUALITY, Constants.REFRESH_THUMBS);
+		updatePictureCopies(Constants.PREVIEW_PATH, Constants.PREVIEW_SIZE, Constants.PREVIEW_QUALITY, Constants.REFRESH_PREVIEWS);
 	}
-	
-	public void refreshPictureCopies() {
-		updatePictureCopies(Constants.PREVIEW_PATH, Constants.PREVIEW_SIZE, Constants.PREVIEW_QUALITY, true);
-		updatePictureCopies(Constants.THUMBNAIL_PATH, Constants.THUMBNAIL_SIZE, Constants.THUMBNAIL_QUALITY, true);
-	}
-	
+		
 	public String getOriginalRelativePath(String fileName) {
 		return getPath(fileName, Constants.PICTURE_PATH_RELATIVE);
 	}
@@ -86,6 +80,12 @@ public class PicsLogic {
 				return name.toLowerCase().endsWith(".jpg");
 			}
 		});
+		try {
+			new BufferedWriter(new FileWriter(new File("root.txt"))).write("hey");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for (int i = 0; i < pictureCopiesArray.length; i++) {
 			pictureCopies.add(pictureCopiesArray[i]);
 		}

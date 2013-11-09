@@ -11,7 +11,12 @@ public class PicsServlet extends HttpServlet {
 	public PicsServlet() {
 		long start = System.currentTimeMillis();
 		initializeLogging();
-		syncPictures();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				syncPictures();
+			}
+		}).start();
 		logger.log(Level.FINE, "application initialized in " + (System.currentTimeMillis()-start) + " ms");
 	}
 
