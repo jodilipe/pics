@@ -1,98 +1,11 @@
 body {
 	background-color:grey;
 }
-
-/*
-html {
-	height: 100%;
-}
-
-body {
-	color:#008080;
-	background-color:grey;
-	font-family:Verdana; 
-	font-size:8pt;
-	
-	margin:0;
-	height: 100%;
-	border:solid;
-	border-color: green;
-}
-
-div.layout {
-	width:600px;
-	min-height:100%;
-	margin: auto;
-	background-color:black;
-	border:solid;
-	border-color: red;
-}
-
-div.header {
-	border:solid;
-	border-color: blue;
-}
-
-div.menu {
-	margin: 10px;
-	display:list-item;
-	border:solid;
-	border-color: white;
-}
-
-div.menu_item {
-	float:left;
-	margin-right: 10px;
-}
-
-div.selected_menu_item {
-	float:left;
-	margin-right: 10px;
-}
-
-div.thumbnails {
-	display: inline-block;
-	border:solid;
-	border-color: yellow;
-}
-*/
 div.thumbnail {
 	border:none;
 	background-color:grey;
+	height: 225px;
 }
 div.btn-default {
 	background-color:#eee;
 }
-/*
-div.picture_preview {
-	margin-left: 10px;
-}
-
-div.picture_original {
-	margin-left: 10px;
-}
-
-div.exif_item {
-}
-
-div.exif_info {
-	margin-left: 10px;
-	display:inline-block;
-}
-
-a {
-	text-decoration: none;
-	font-weight:bold;
-	color:#008080; 
-	font-family:Verdana; 
-	font-size:8pt;
-}
-
-a:hover {
-	text-decoration: underline;
-	font-weight:bold;
-	color:#008080;
-	font-family:Verdana; 
-	font-size:8pt;
-}
-*/
