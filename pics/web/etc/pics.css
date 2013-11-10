@@ -9,3 +9,9 @@ div.thumbnail {
 div.btn-default {
 	background-color:#eee;
 }
+div.exif_info {
+	margin: 10px;
+}
+div.preview_img {
+	margin-left: 10px;
+}

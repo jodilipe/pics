@@ -41,9 +41,9 @@
           <div class="row">
           
           <% if (Constants.SHOW_ORIGINALS) { %>
-			<a href="original.jsp?filename=<%= request.getParameter("filename") %>"><img title="click to view full size" border="0" src="./preview/<%= request.getParameter("filename") %>"></a>
+			<div class="preview_img"><a href="original.jsp?filename=<%= request.getParameter("filename") %>"><img title="click to view full size" border="0" src="./preview/<%= request.getParameter("filename") %>"></a></div>
           <% } else { %>
-          	<a href="javascript: history.go(-1)"><img title="click to close" border="0" src="./preview/<%= request.getParameter("filename") %>"></a>
+          	<div class="preview_img"><a href="javascript: history.go(-1)"><img title="click to close" border="0" src="./preview/<%= request.getParameter("filename") %>"></a></div>
           <% } %>
 
 <div class="exif_info">
