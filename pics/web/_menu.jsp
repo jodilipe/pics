@@ -9,6 +9,7 @@
             <a href="index.jsp?category=<%= folder.getName() %>" class="list-group-item"><%= folder.getName() %></a>
 			<%   } %>
 			<% } %>
+			<a href="order.jsp" class="list-group-item">Bestilling af billeder</a>
 			
           </div>
         </div><!--/span-->
