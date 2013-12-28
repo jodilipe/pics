@@ -26,40 +26,31 @@
 
   <body style="">
 
-	<!-- include _navbar.jsp -->  
+	<%@include file="_navbar.jsp"%>
 
     <div class="container">
+			
+		<%@include file="_category_img.jsp"%>
 
-      <div class="row row-offcanvas row-offcanvas-right">
-
-        <div class="col-xs-12 col-sm-9">
-		
-		<!-- include _navbar_toggle_button.jsp -->
-		  
-		<%@include file="_header.jsp"%>
-
-          <div class="row">
-          
-			<% List<String> thumbs = new PicsLogic().getThumbnails(request.getParameter("category")); %>
+       	<div class="row">
+        
+		<% List<String> thumbs = new PicsLogic().getThumbnails(request.getParameter("category")); %>
+		<% if (!thumbs.isEmpty()) { %>
 			<% for (String thumb : thumbs) { %>
-				<div align="center" valign="bottom" class="thumbnail col-md-4 col-sm-6 col-lg-3">
-					<p><a href="preview.jsp?filename=<%= thumb %>"><img border="0" src="./thumb/<%= thumb %>" title="<%= thumb %>"></a></p>
-					<p><a class="btn btn-default" href="preview.jsp?filename=<%= thumb %>" role="button">View details »</a></p>
+				<div class="thumbnail col-xs-6 col-sm-6 col-md-4 col-lg-3">
+					<p><a href="preview.jsp?filename=<%= thumb %>&category=<%= request.getParameter("category") %>"><img border="0" src="./thumb/<%= thumb %>" title="<%= thumb %>"></a></p>
+					<p><span class="img_description"><%= thumb %></span></p>
 				</div>
 			<% } %>
+		<% } else { %>
+			<div class="content col-sm-12 col-lg-12 col-xl-12">
+				<h1>Pictures by Jon Lind</h1>
+			</div><!--/span-->  
+		<% } %>
 
-          </div><!--/row-->
-        </div><!--/span-->
-
-	<%@include file="_menu.jsp"%>
-        
-      </div><!--/row-->
-
-	<%@include file="_footer.jsp"%>
+       	</div><!--/row-->
 
     </div><!--/.container-->
-
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -67,5 +58,5 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
-</body>
+	</body>
 </html>

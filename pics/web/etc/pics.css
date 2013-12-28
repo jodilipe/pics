@@ -1,17 +1,55 @@
 body {
-	background-color:grey;
+	background-color:	#424242;
+	color:	#BDBDBD;
 }
 div.thumbnail {
 	border:none;
-	background-color:grey;
+	background-color:	#424242;
 	height: 225px;
+	text-align: center;
 }
-div.btn-default {
-	background-color:#eee;
+a.btn-default,btn {
+	background-color:	#BDBDBD;
+	border-color: #BDBDBD;
 }
 div.exif_info {
-	margin: 10px;
+	margin: 25px;
 }
 div.preview_img {
 	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+div.original_img {
+	margin-left: 25px;
+	margin-bottom: 10px;
+}
+img.logo {
+	float: right;
+}
+div.nav_buttons {
+	text-align: center;
+}
+span.img_description {
+	font-size: x-small;
+}
+div.container {
+	max-width:	1024px;
+}
+img.category_img {
+	padding-bottom: 20px;
+}
+img.site_brand {
+	margin-top:	-6px;
+}
+div.exif_item {
+	white-space: nowrap;
+}
+div.exif_name {
+	width:	200px;
+	display: inline-block;
+}
+div.exif_value {
+	width:	200px;
+	display: inline-block;
 }

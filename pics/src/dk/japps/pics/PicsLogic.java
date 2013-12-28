@@ -64,6 +64,26 @@ public class PicsLogic {
 	public List<Folder> getFolders() {
 		List<Folder> folders = new ArrayList<Folder>();
 		getPictureFolders(folders, new PictureFileUtil().getPictures());
+		if (Constants.FOLDER_SORT_ORDER != null) {
+			StringTokenizer st = new StringTokenizer(Constants.FOLDER_SORT_ORDER, ",");
+			final List<String> sortOrderList = new ArrayList<String>();
+			while (st.hasMoreTokens()) {
+				sortOrderList.add(st.nextToken());
+			}
+			Collections.sort(folders, new Comparator<Folder>() {
+				@Override
+				public int compare(Folder folder1, Folder folder2) {
+					int indexOfFolder1 = sortOrderList.indexOf(folder1.getName());
+					int indexOfFolder2 = sortOrderList.indexOf(folder2.getName());
+					if (indexOfFolder1 < indexOfFolder2) {
+						return -1;
+					} else if (indexOfFolder1 > indexOfFolder2) {
+						return 1;
+					}
+					return 0;
+				}
+			});
+		}
 		return folders;
 	}
 
@@ -80,14 +100,10 @@ public class PicsLogic {
 				return name.toLowerCase().endsWith(".jpg");
 			}
 		});
-		try {
-			new BufferedWriter(new FileWriter(new File("root.txt"))).write("hey");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		for (int i = 0; i < pictureCopiesArray.length; i++) {
-			pictureCopies.add(pictureCopiesArray[i]);
+		if (pictureCopiesArray != null) {
+			for (int i = 0; i < pictureCopiesArray.length; i++) {
+				pictureCopies.add(pictureCopiesArray[i]);
+			}
 		}
 		return pictureCopies;
 	}

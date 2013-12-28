@@ -1,0 +1,4 @@
+/bin
+/web/thumb/*.jpg
+/web/preview/*.jpg
+*.class

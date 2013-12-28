@@ -26,48 +26,34 @@
 
   <body style="">
 
-	<!-- include _navbar.jsp -->  
+	<%@include file="_navbar.jsp"%>
 
     <div class="container">
-
-      <div class="row row-offcanvas row-offcanvas-right">
-
-        <div class="col-xs-12 col-sm-9">
-		
-		<!-- include _navbar_toggle_button.jsp -->
-		  
-		<%@include file="_header.jsp"%>
-
-          <div class="row">
-          
-          <% if (Constants.SHOW_ORIGINALS) { %>
-			<div class="preview_img"><a href="original.jsp?filename=<%= request.getParameter("filename") %>"><img title="click to view full size" border="0" src="./preview/<%= request.getParameter("filename") %>"></a></div>
-          <% } else { %>
-          	<div class="preview_img"><a href="javascript: history.go(-1)"><img title="click to close" border="0" src="./preview/<%= request.getParameter("filename") %>"></a></div>
-          <% } %>
-
-<div class="exif_info">
-<% Map<String, String> result = new PictureFileUtil().getExifInfo(new PicsLogic().getOriginalPath(request.getParameter("filename"))); %>	
-	<% List<String> keys = new ArrayList<String>(); %>	
-	<% keys.addAll(result.keySet()); %>	
-	<% Collections.sort(keys);%>
-	<% for (String key : keys) { %>		 
-	<div class="exif_item"><%= key + ": " + result.get(key) %></div>			
-	<% } %>		
-</div>
-
-          </div><!--/row-->
-        </div><!--/span-->
-
-	<%@include file="_menu.jsp"%>
+			
+       	<div class="row">
         
-      </div><!--/row-->
+			<div class="nav_buttons">
+				<a class="btn btn-default" href="preview.jsp?filename=<%= new PictureFileUtil().getPrev(request.getParameter("filename")) %>&category=<%= request.getParameter("category") %>" role="button"><span class="glyphicon glyphicon-chevron-left"></span></a>
+				<a class="btn btn-default" href="preview.jsp?filename=<%= new PictureFileUtil().getNext(request.getParameter("filename")) %>&category=<%= request.getParameter("category") %>" role="button"><span class="glyphicon glyphicon-chevron-right"></span></a>
+			</div>
+			
+			<% if (Constants.SHOW_ORIGINALS) { %>
+				<div class="preview_img"><a href="original.jsp?filename=<%= request.getParameter("filename") %>"><img class="img-responsive" title="click to view full size" border="0" src="./preview/<%= request.getParameter("filename") %>"></a></div>
+			<% } else { %>
+				<div class="preview_img"><a href="index.jsp?category=<%= request.getParameter("category") %>"><img class="img-responsive" title="click to close" border="0" src="./preview/<%= request.getParameter("filename") %>"></a></div>
+			<% } %>
+						
+			<div class="exif_info">
+			<div class="exif_item"><div class="exif_name">File name</div><div class="exif_value"><%= request.getParameter("filename") %></div></div>
+			<% Map<String, String> result = new PictureFileUtil().getExifInfo(new PicsLogic().getOriginalPath(request.getParameter("filename"))); %>	
+				<% for (String key : result.keySet()) { %>
+				<div class="exif_item"><div class="exif_name"><%= key %></div><div class="exif_value"><%= result.get(key) %></div></div>			
+				<% } %>		
+			</div>
 
-	<%@include file="_footer.jsp"%>
+       	</div><!--/row-->
 
     </div><!--/.container-->
-
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -75,5 +61,5 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
-</body>
+	</body>
 </html>

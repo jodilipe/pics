@@ -9,88 +9,35 @@ import com.drew.metadata.*;
 import dk.japps.pics.*;
 
 public class PictureFileUtil {
-	private static List<String> excludeTags = new ArrayList<String>();
 	private static List<String> includeTags = new ArrayList<String>();
 	
 	static {
-		excludeTags.add("Firmware Revision");
-		excludeTags.add("Unknown tag");
-		excludeTags.add("Related Image Width");
-		excludeTags.add("Date Stamp Mode");
-		excludeTags.add("Control Mode");
-		excludeTags.add("Face Detect Array");
-		excludeTags.add("Unknown Camera Setting");
-		excludeTags.add("AF Info Array");
-		excludeTags.add("AF Point Selected");
-		excludeTags.add("Blue Colorant");
-		excludeTags.add("Blue TRC");
-		excludeTags.add("CMM Type");
-		excludeTags.add("Class");
-		excludeTags.add("Color space");
-		excludeTags.add("Component");
-		excludeTags.add("Copyright");
-		excludeTags.add("Custom Rendered");
-		excludeTags.add("Date/Time Original");
-		excludeTags.add("Date/Time Digitized");
-		excludeTags.add("Device Mfg Description");
-		excludeTags.add("Device manufacturer");
-		excludeTags.add("Device model");
-		excludeTags.add("File Source");
-		excludeTags.add("Green Colorant");
-		excludeTags.add("Gain Control");
-		excludeTags.add("Green TRC");
-		excludeTags.add("Exif Image Height");
-		excludeTags.add("Exif Image Width");
-		excludeTags.add("Device Model Description");
-		excludeTags.add("Lens Information");
-		excludeTags.add("Luminance");
-		excludeTags.add("Measurement");
-		excludeTags.add("Media Black Point");
-		excludeTags.add("Media White Point");
-		excludeTags.add("Primary Platform");
-		excludeTags.add("Profile");
-		excludeTags.add("Red Colorant");
-		excludeTags.add("Red TRC");
-		excludeTags.add("Resolution Unit");
-		excludeTags.add("Sensing Method");
-		excludeTags.add("Serial Number");
-		excludeTags.add("Signature");
-		excludeTags.add("Sub-Sec");
-		excludeTags.add("Tag Count");
-		excludeTags.add("Technology");
-		excludeTags.add("Version");
-		excludeTags.add("Viewing Conditions");
-		excludeTags.add("XYZ values");
-		excludeTags.add("White Balance");
-		excludeTags.add("Camera Info Array");
-		excludeTags.add("Camera Temperature");
-		excludeTags.add("Camera Type");
-		excludeTags.add("Canon Model ID");
-		excludeTags.add("Categories");
-		excludeTags.add("F Number");
-		excludeTags.add("Flash Guide Number");
-		excludeTags.add("Flash Output");
-		excludeTags.add("Focal Plane");
-		excludeTags.add("Focal Units per mm");
-		excludeTags.add("Focus Distance");
-		excludeTags.add("Image Number");
-		excludeTags.add("Image Unique ID");
-		excludeTags.add("Interoperability Index");
-		excludeTags.add("Long Focal Length");
-		excludeTags.add("Measured EV 2");
-		excludeTags.add("My Colors");
-		excludeTags.add("Optical Zoom Code");
-		excludeTags.add("Orientation");
-		excludeTags.add("Related Image Length");
-		excludeTags.add("Self Timer 2");
-		excludeTags.add("Sequence Number");
-		excludeTags.add("Short Focal Length");
-		excludeTags.add("Target Aperture");
-		excludeTags.add("Target Exposure Time");
-		excludeTags.add("Thumbnail");
-		excludeTags.add("VRD Offset");
-		
+		includeTags.add("Date/Time Original");
+		includeTags.add("Image Height");
+		includeTags.add("Image Width");
+		includeTags.add("F-Number");
+		includeTags.add("Exposure Time");
+		includeTags.add("ISO Speed Ratings");
 		includeTags.add("White Balance Mode");
+		includeTags.add("White Balance");
+
+		includeTags.add("Lens");
+//		includeTags.add("Make");
+		includeTags.add("Model");
+		
+		includeTags.add("Flash");
+		includeTags.add("Focal Length 35");
+		includeTags.add("Exposure Bias Value");
+		includeTags.add("Exposure Mode");
+		includeTags.add("Exposure Program");
+
+		includeTags.add("Color Space");
+		includeTags.add("Data Precision");
+
+		includeTags.add("Rating");
+		includeTags.add("Software");
+		includeTags.add("Artist");
+		includeTags.add("Copyright Notice");
 	}
 
 	public static void main(String[] args) {
@@ -105,39 +52,86 @@ public class PictureFileUtil {
 		}
 		System.out.println("done");
 	}
+	
+	public String getPrev(String file) {
+		List<String> files = getFiles(getPictures(), file);
+		int indexOfFile = files.indexOf(file);
+		if (indexOfFile == 0) {
+			return files.get(files.size()-1);
+		}
+		return files.get(indexOfFile - 1);
+	}
 
-	public Map<String, String> getExifInfo(String filename) {
-		Map<String, String> result = new HashMap<String, String>();
-		try {
-			Metadata metadata = ImageMetadataReader.readMetadata(new File(filename));
-			for (Directory directory : metadata.getDirectories()) {
-				for (Tag tag : directory.getTags()) {
-					if (includeTag(tag.getTagName())) {
-						result.put(tag.getTagName(), tag.getDescription());
-					} 
-//					else {
-//						result.put(" - " + tag.getTagName(), tag.getDescription());
-//					}
+	public String getNext(String file) {
+		List<String> files = getFiles(getPictures(), file);
+		int indexOfFile = files.indexOf(file);
+		if (indexOfFile == files.size()-1) {
+			return files.get(0);
+		}
+		return files.get(indexOfFile + 1);
+	}
+	
+	private List<String> getFiles(Folder folder, String file) {
+		List<String> files = new ArrayList<String>();
+		getFiles(files, folder, file);
+		return files;
+	}
+	
+	private void getFiles(List<String> files, Folder folder, String file) {
+		if (inFolder(folder, file)) {
+			collectFiles(files, folder);
+		} else {
+			for(FileItem fileItem : folder.getFileItems()) {
+				if (fileItem.isFolder()) {
+					getFiles(files, (Folder) fileItem, file);
 				}
 			}
-		} catch (Exception e) {
-			result.put("Exif", "no info found");
-//			throw new RuntimeException(e);
+		}
+	}
+	
+	private void collectFiles(List<String> files, Folder folder) {
+		for (FileItem fileItem : folder.getFileItems()) {
+			if (fileItem.isFile()) {
+				files.add(fileItem.getName());
+			}
+		}
+	}
+
+	private boolean inFolder(Folder folder, String file) {
+		for(FileItem fileItem : folder.getFileItems()) {
+			if (fileItem.isFile() && fileItem.getName().equals(file)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Map<String, String> getExifInfo(String filename) {
+		Map<String, String> result = new LinkedHashMap<String, String>();
+		Map<String, String> imageMetaData = getImageMetaData(filename);
+		for (String includeTag : includeTags) {
+			if (imageMetaData.get(includeTag) != null) {
+				result.put(includeTag, imageMetaData.get(includeTag));
+			}
 		}
 		return result;
 	}
 	
-	private boolean includeTag(String tagName) {
-		if (!includeTags.contains(tagName)) {
-			for (String excludeTag : excludeTags) {
-				if (tagName.contains(excludeTag)) {
-					return false;
-				}
+	private Map<String, String> getImageMetaData(String filename) {
+		Map<String, String> imageMetaData = new HashMap<String, String>();
+		try {
+ 		Metadata metadata = ImageMetadataReader.readMetadata(new File(filename));
+		for (Directory directory : metadata.getDirectories()) {
+			for (Tag tag : directory.getTags()) {
+				imageMetaData.put(tag.getTagName(), tag.getDescription());
 			}
 		}
-		return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return imageMetaData;
 	}
-
+	
 	public Folder getPictures() {
 		Folder root = new Folder(Constants.PICTURE_PATH, null, null);
 		addChildren(root);

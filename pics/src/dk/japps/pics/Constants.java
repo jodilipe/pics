@@ -17,6 +17,8 @@ public class Constants {
 	public static final boolean REFRESH_THUMBS = new Boolean("true".equals(PicsProperties.getProperty("refresh_thumbs")));
 	public static final boolean REFRESH_PREVIEWS = new Boolean("true".equals(PicsProperties.getProperty("refresh_previews")));
 	
-	public static final String TITLE = new String(PicsProperties.getProperty("title", "Main title"));
-	public static final String SUB_TITLE = new String(PicsProperties.getProperty("sub_title", "Sub title"));
+	public static final String TITLE = PicsProperties.getProperty("title", "Main title");
+	public static final String SUB_TITLE = PicsProperties.getProperty("sub_title", "Sub title");
+
+	public static final String FOLDER_SORT_ORDER = PicsProperties.getProperty("folder_sort_order");
 }

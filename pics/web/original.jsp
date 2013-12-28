@@ -26,34 +26,17 @@
 
   <body style="">
 
-	<!-- include _navbar.jsp -->  
+	<%@include file="_navbar.jsp"%>
 
     <div class="container">
-
-      <div class="row row-offcanvas row-offcanvas-right">
-
-        <div class="col-xs-12 col-sm-9">
-		
-		<!-- include _navbar_toggle_button.jsp -->
-		  
-		<%@include file="_header.jsp"%>
-
-          <div class="row">
-          
-<a href="javascript: history.go(-1)"><img title="click to close" border="0" src="<%= new PicsLogic().getOriginalRelativePath(request.getParameter("filename")) %>"></a>
-
-          </div><!--/row-->
-        </div><!--/span-->
-
-	<%@include file="_menu.jsp"%>
+			
+       	<div class="row">
         
-      </div><!--/row-->
+			<div class="original_img"><a href="javascript: history.go(-1)"><img title="click to close" border="0" src="<%= new PicsLogic().getOriginalRelativePath(request.getParameter("filename")) %>"></a></div>
 
-	<%@include file="_footer.jsp"%>
+       	</div><!--/row-->
 
     </div><!--/.container-->
-
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -61,5 +44,5 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
-</body>
+	</body>
 </html>
